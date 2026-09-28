@@ -81,10 +81,12 @@ await page.getByRole('textbox', {
   name: 'Full name'
 }).fill('Aman Kaur');
 
+const randomEmail = `test${Math.random().toString(36).slice(2, 10)}@yopmail.com`;
+console.log('Generated random email:', randomEmail);
 await page.getByRole('textbox', {
   name: 'Email',
   exact: true
-}).fill('test211@yopmail.com');
+}).fill(randomEmail);
 
 // 5. Select India
 const countryDropdown = page.getByRole('combobox', {
@@ -159,8 +161,7 @@ const verifyButton = page.getByRole('button', {
 
 await expect(verifyButton).toBeVisible();
 
-await verifyButton.click();
+await verifyButton.click({ timeout: 10000 }); 
 // Wait for validation/verification message to appear
-await page.waitForTimeout(3000);
-await page.pause();
+ await page.pause();
 })
